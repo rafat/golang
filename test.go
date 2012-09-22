@@ -6,7 +6,9 @@ func main()  {
 
 	var a int
 	a = 19
-	fmt.Print(a)
+	var s string = "hello"
+	fmt.Print(a,"\n")
+	fmt.Printf("%s\n",s)
 
 }
 
