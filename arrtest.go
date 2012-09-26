@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+
 func rec(i int) {
 
 	if i == 10 {
@@ -14,21 +15,28 @@ func rec(i int) {
 
 }
 
-func add(x []int, y []int) []int {
+type Interface interface{
+	Len() int
+	Val(i int)
+}
+
+func add(x, y Interface) Interface {
 	var lenx,leny int
-	lenx=len(x)
-	leny=len(y)
+	lenx = x.Len()
+	leny = y.Len()
 
 	var max,min int
+	output := x
 	if lenx > leny {
 		max = lenx
 		min = leny
+		output = x
 	} else {
 		max = leny
 		min=lenx
+		output = y
 	}
 
-	output :=make([]int,max)
 
 	for i := 0;i < min; i++ {
 		output[i]=x[i]+y[i]
@@ -49,6 +57,15 @@ func add(x []int, y []int) []int {
 
 }
 
+type IntAdd []int
+
+func (p IntAdd) Len() int {len(p)}
+func (p IntAdd) Val(i int) {return p[i]}
+
+type FloatAdd []float32
+func (p FloatAdd) Val(i int) {return p[i]}
+func (p FloatAdd) Len() int {len(p)}
+
 func main() {
 
 	var a [10]int
@@ -66,6 +83,7 @@ func main() {
 	var out []int
 	out = add(s1,s2)
         fmt.Print(out)
+
 
 
 }
