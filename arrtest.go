@@ -77,6 +77,26 @@ func (p FloatAdd) SetVal(val interface{},i int) {p[i] = val.(float64)}
 func (p FloatAdd) GetVal(i int) interface{} {return p[i]}
 func (p FloatAdd) AddVal(val interface{},i int) interface{} {return p[i]+val.(float64)}
 
+func addint(x,y []int) []int {
+	oup := add(IntAdd(x),IntAdd(y))
+	loup := oup.Len()
+	oup2 := make([]int,loup)
+	for i := 0; i < loup; i++ {
+		oup2[i]=(oup.GetVal(i)).(int)
+	}
+	return oup2
+}
+
+func addfloat(x,y []float64) []float64 {
+	oup := add(FloatAdd(x),FloatAdd(y))
+	loup := oup.Len()
+	oup2 := make([]float64,loup)
+	for i := 0; i < loup; i++ {
+		oup2[i]=(oup.GetVal(i)).(float64)
+	}
+	return oup2
+}
+
 func main() {
 
     var a [10]float64
@@ -91,8 +111,8 @@ func main() {
 
     s1:=a[0:5]
     s2:=a[5:8]
-    out := add(FloatAdd(s1),FloatAdd(s2))
-        fmt.Print(out)
+    out := addfloat(s1,s2)
+    fmt.Print(out)
 
 
 
